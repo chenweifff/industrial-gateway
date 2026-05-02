@@ -1,0 +1,55 @@
+{
+    "gateway": {
+        "name": "industrial-gateway-001",
+        "daemonize": false
+    },
+    "logger": {
+        "level": "DEBUG",
+        "file": "./data/gateway.log",
+        "max_size_mb": 10,
+        "max_files": 5,
+        "console": true
+    },
+    "simulator": {
+        "device_count": 3,
+        "points_per_device": 4,
+        "sampling_interval_ms": 1000,
+        "data_rules": [
+            {"point_type": "temperature", "data_type": "float",  "rule": "random_walk", "min": 0.0,   "max": 100.0},
+            {"point_type": "pressure",    "data_type": "float",  "rule": "cycle",       "min": 0.0,   "max": 10.0},
+            {"point_type": "switch",      "data_type": "bool",   "rule": "random",      "min": 0,     "max": 1},
+            {"point_type": "counter",     "data_type": "int",    "rule": "increment",   "min": 0,     "max": 65535}
+        ],
+        "abnormal_data_probability": 0.02,
+        "device_offline_probability": 0.05
+    },
+    "collector": {
+        "timeout_ms": 5000,
+        "retry_count": 3
+    },
+    "processor": {
+        "enable_range_check": true,
+        "enable_dedup": true,
+        "enable_filter": false,
+        "filter_threshold": 0.0
+    },
+    "storage": {
+        "db_path": "./data/gateway.db",
+        "max_cache_size": 10000,
+        "cleanup_interval_sec": 3600,
+        "retention_days": 7
+    },
+    "reporter": {
+        "broker_address": "tcp://localhost:1883",
+        "client_id": "gateway-001",
+        "username": "",
+        "password": "",
+        "topic": "industrial/gateway/data",
+        "qos": 1,
+        "keepalive_sec": 60,
+        "reconnect_interval_sec": 5,
+        "max_retry_count": 3,
+        "batch_size": 10,
+        "batch_interval_ms": 2000
+    }
+}

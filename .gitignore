@@ -1,0 +1,38 @@
+# 编译产物
+*.o
+*.obj
+*.exe
+*.out
+*.elf
+*.bin
+
+# 库文件
+*.a
+*.la
+*.lo
+*.so
+*.dylib
+*.dll
+
+# Make
+build/
+dist/
+cmake-build-*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+
+# 临时数据
+data/*.db
+data/*.dat
